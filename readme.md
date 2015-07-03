@@ -7,6 +7,7 @@
 ># Installation Steps:
 
 ##Turn on Apt Progress Output##
+   
    `echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar`
 
 ##Install required packages##
@@ -16,7 +17,7 @@
 
 ##Strip out extra locale data##
 
-   `for x in `ls /usr/share/locale | grep -v en_GB`; do rm -fr /usr/share/locale/$x; done;`
+    for x in `ls /usr/share/locale | grep -v en_GB`; do rm -fr /usr/share/locale/$x; done;
 
 
 ##Remove Man Pages and Docs to preserve Space##
@@ -27,7 +28,7 @@
 
 ##Set documentation generation to off for future installed packages##
        
-   `cat > /etc/dpkg/dpkg.cfg.d/01_nodoc << "EOF"
+    cat > /etc/dpkg/dpkg.cfg.d/01_nodoc << "EOF"
     # This config file will prevent packages from install docs that are not needed.
     path-exclude /usr/share/doc/*
     path-exclude /usr/share/man/*
@@ -36,12 +37,12 @@
     # lintian stuff is small, but really unnecessary
     path-exclude /usr/share/lintian/*
     path-exclude /usr/share/linda/*
-    EOF`
+    EOF
 
 ##Remove Time Zone Data Other than America##
 
    This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
-   `for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;`
+   for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
 
 ##Remove redundant GCC##
 
@@ -88,7 +89,7 @@
     }
     
     PROMPT_COMMAND='set_prompt'
-fi
+    fi
 
 ##Set Dockerfile Runtime command (default command to run when lauched via docker run)##
     
