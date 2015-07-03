@@ -43,7 +43,7 @@
 
 This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
    
-   for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
+    for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
 
 ##Remove redundant GCC##
 
