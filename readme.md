@@ -8,11 +8,11 @@
 
 ##Turn on Apt Progress Output##
    
-   `echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar`
+    echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar
 
 ##Install required packages##
 
-   `DEBIAN_FRONTEND=noninteractive apt-get -y install nano`
+    DEBIAN_FRONTEND=noninteractive apt-get -y install nano
 
 
 ##Strip out extra locale data##
@@ -22,8 +22,8 @@
 
 ##Remove Man Pages and Docs to preserve Space##
 
-   `rm -fr /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/*
-    rm -rf /usr/share/lintian/* /usr/share/linda/* /var/cache/man/*`
+    rm -fr /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/*
+    rm -rf /usr/share/lintian/* /usr/share/linda/* /var/cache/man/*
 
 
 ##Set documentation generation to off for future installed packages##
@@ -49,8 +49,8 @@
     gcc-4.8-base and gcc-4.9.base were installed by default, so remove the older one
     If this causes any issues, it can be readded by apt-get install gcc-4.8-base
     
-   `echo 'Yes, do as I say!' | apt-get --force-yes remove gcc-4.8-base;
-    apt-get purge gcc-4.8-base`
+    echo 'Yes, do as I say!' | apt-get --force-yes remove gcc-4.8-base;
+    apt-get purge gcc-4.8-base 
 
 
 ##Copy the included Terminal CLI Color Scheme file to /etc/profile.d so that the terminal color will be included in all child images##
@@ -123,7 +123,7 @@ Because we want to make this image as light weight as possible in terms of size,
 ###### Export and Reimport the Container note that because we started the build container with the name of debianbuild, we will use that in the export statement instead of the container ID.
 
     
-   `docker export debianbuild | docker import - appcontainers/debian:latest`
+    docker export debianbuild | docker import - appcontainers/debian:latest
 
 ># Verify
 
