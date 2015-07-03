@@ -41,13 +41,14 @@
 
 ##Remove Time Zone Data Other than America##
 
-   This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
+This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
+   
    for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
 
 ##Remove redundant GCC##
 
-    gcc-4.8-base and gcc-4.9.base were installed by default, so remove the older one
-    If this causes any issues, it can be readded by apt-get install gcc-4.8-base
+gcc-4.8-base and gcc-4.9.base were installed by default, so remove the older one
+If this causes any issues, it can be readded by apt-get install gcc-4.8-base
     
     echo 'Yes, do as I say!' | apt-get --force-yes remove gcc-4.8-base;
     apt-get purge gcc-4.8-base 
