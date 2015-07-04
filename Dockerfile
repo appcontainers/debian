@@ -1,9 +1,9 @@
 ############################################################
-# Dockerfile to create Debian Jessie Core 
+# Dockerfile to create Debian 8 Jessie Core 
 # Based on debian
 ############################################################
 
-# Set the base image to scratch
+# Set the base image to debian
 FROM library/debian:latest
 
 # File Author / Maintainer
@@ -12,6 +12,7 @@ MAINTAINER Rich Nason rnason@appcontainers.com
 #*************************
 #*       Versions        *
 #*************************
+
 
 #**********************************
 #* Override Enabled ENV Variables *
