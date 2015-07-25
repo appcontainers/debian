@@ -78,9 +78,17 @@ echo "# lintian stuff is small, but really unnecessary" >> /etc/dpkg/dpkg.cfg.d/
 echo "path-exclude /usr/share/lintian/*" >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
 echo "path-exclude /usr/share/linda/*" >> /etc/dpkg/dpkg.cfg.d/01_nodoc
 
-#Remove Non America TimeZone Data
+# Remove Non America TimeZone Data
 # This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
 RUN for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
+
+# Disable IPV6
+RUN echo "net.ipv6.conf.all.disable_ipv6=1" > /etc/sysctl.d/disableipv6.conf && \
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+echo "net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+echo "net.ipv6.conf.eth1.disable_ipv6 = 1" >> /etc/sysctl.conf
 
 #####################################################################################################################
 #*********************************************  CONFIGURE START ITEMS  **********************************************
