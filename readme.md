@@ -1,6 +1,6 @@
-**Debian 8 Jessie Base Minimal Install - 82 MB - Updated 7/3/2015**
+**Debian 8 Jessie Base Minimal Install - 82 MB - Updated 8/7/2015**
 
-# Debian 8: Jessie Base Minimal Install - 82 MB - Updated 7/3/2015
+# Debian 8: Jessie Base Minimal Install - 82 MB - Updated 8/7/2015
 
 ***This container is built from debian:latest, (130 MB Before Flatification)***
 
@@ -39,6 +39,11 @@
     path-exclude /usr/share/linda/*
     EOF
 
+##Set Time Zone to EST (America/New_York)##
+    cp /etc/localtime /root/old.timezone && \
+    rm -f /etc/localtime && \
+    ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+
 ##Remove Time Zone Data Other than America##
 
 This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
@@ -52,6 +57,14 @@ If this causes any issues, it can be readded by apt-get install gcc-4.8-base
     
     echo 'Yes, do as I say!' | apt-get --force-yes remove gcc-4.8-base;
     apt-get purge gcc-4.8-base 
+
+##Turn off IPV6##
+    echo "net.ipv6.conf.all.disable_ipv6=1" > /etc/sysctl.d/disableipv6.conf && \
+    echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+    echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+    echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+    echo "net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf && \
+    echo "net.ipv6.conf.eth1.disable_ipv6 = 1" >> /etc/sysctl.conf
 
 
 ##Copy the included Terminal CLI Color Scheme file to /etc/profile.d so that the terminal color will be included in all child images##
@@ -136,4 +149,6 @@ Issuing a `docker images` should now show a newly saved appcontainers/debian ima
 
 ># Dockerfile Changelog
     
+    08/07/2015 - Turn off IPV6
+
     07/03/2015 - Initial Image Build
