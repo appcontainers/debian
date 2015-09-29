@@ -1,8 +1,8 @@
-**Debian 8 Jessie Base Minimal Install - 82 MB - Updated 8/7/2015**
+**Debian 8 Jessie Base Minimal Install - 82 MB - Updated 9/29/2015**
 
-# Debian 8: Jessie Base Minimal Install - 82 MB - Updated 8/7/2015
+# Debian 8: Jessie Base Minimal Install - 82 MB - Updated 9/29/2015
 
-***This container is built from debian:latest, (130 MB Before Flatification)***
+***This container is built from debian:latest, (127 MB Before Flatification)***
 
 ># Installation Steps:
 
@@ -105,6 +105,10 @@ If this causes any issues, it can be readded by apt-get install gcc-4.8-base
     PROMPT_COMMAND='set_prompt'
     fi
 
+##Add the following to prevent any additions to the .bashrc from being executed via SSH or SCP sessions
+    echo -e "\nif [[ -n \"\$SSH_CLIENT\" || -n \"\$SSH_TTY\" ]]; then\n\treturn;\nfi\n" >> /root/.bashrc && \
+    echo -e "\nif [[ -n \"\$SSH_CLIENT\" || -n \"\$SSH_TTY\" ]]; then\n\treturn;\nfi\n" >> /etc/skel/.bashrc
+
 ##Set Dockerfile Runtime command (default command to run when lauched via docker run)##
     
     CMD /bin/bash
@@ -148,7 +152,9 @@ Issuing a `docker images` should now show a newly saved appcontainers/debian ima
    `docker run -it -d appcontainers/debian`
 
 ># Dockerfile Changelog
-    
+
+    09/29/2015 - Add Line to .bashrc to prevent additions to the basrc to be run from SSH/SCP login
+
     08/07/2015 - Turn off IPV6
 
     07/03/2015 - Initial Image Build
