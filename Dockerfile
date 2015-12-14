@@ -79,10 +79,6 @@ RUN cp /etc/localtime /root/old.timezone && \
 rm -f /etc/localtime && \
 ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
-# Remove Non America TimeZone Data
-# This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
-RUN for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
-
 # Disable IPV6
 RUN echo "net.ipv6.conf.all.disable_ipv6=1" > /etc/sysctl.d/disableipv6.conf && \
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf && \
@@ -99,7 +95,6 @@ ADD termcolor.sh /etc/profile.d/PS1.sh
 RUN chmod +x /etc/profile.d/PS1.sh && \
 echo "source /etc/profile.d/PS1.sh" >> /root/.bashrc && \
 echo "source /etc/profile.d/PS1.sh" >> /etc/skel/.bashrc
-# echo "alias vim='nano'" >> /root/.bashrc
 
 # Add the following to prevent any additions to the .bashrc from being executed via SSH or SCP sessions
 RUN echo "\nif [[ -n \"\$SSH_CLIENT\" || -n \"\$SSH_TTY\" ]]; then\n\treturn;\nfi\n" >> /root/.bashrc && \
@@ -141,3 +136,7 @@ CMD /bin/bash
 
 #RUN mkdir -p /debian-build && \
 #mksquashfs / /debian-build.sqfs
+
+# Remove Non America TimeZone Data
+# This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
+# RUN for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;

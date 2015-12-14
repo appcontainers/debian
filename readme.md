@@ -1,6 +1,6 @@
-**Debian 8 Jessie Base Minimal Install - 82 MB - Updated 9/29/2015**
+**Debian 8.2 Jessie Base Minimal Install - 82 MB - Updated 12/14/2015 tags(lastest, jessie)**
 
-# Debian 8: Jessie Base Minimal Install - 82 MB - Updated 9/29/2015
+# Debian 8.2 Jessie Base Minimal Install - 82 MB - Updated 12/14/2015 tags(lastest, jessie)
 
 ***This container is built from debian:latest, (127 MB Before Flatification)***
 
@@ -25,7 +25,6 @@
     rm -fr /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/*
     rm -rf /usr/share/lintian/* /usr/share/linda/* /var/cache/man/*
 
-
 ##Set documentation generation to off for future installed packages##
        
     cat > /etc/dpkg/dpkg.cfg.d/01_nodoc << "EOF"
@@ -44,20 +43,6 @@
     rm -f /etc/localtime && \
     ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
-##Remove Time Zone Data Other than America##
-
-This can be undone via: wget 'ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz'
-   
-    for x in `ls /usr/share/zoneinfo|grep -v America`; do rm -fr $x;done;
-
-##Remove redundant GCC##
-
-gcc-4.8-base and gcc-4.9.base were installed by default, so remove the older one
-If this causes any issues, it can be readded by apt-get install gcc-4.8-base
-    
-    echo 'Yes, do as I say!' | apt-get --force-yes remove gcc-4.8-base;
-    apt-get purge gcc-4.8-base 
-
 ##Turn off IPV6##
     echo "net.ipv6.conf.all.disable_ipv6=1" > /etc/sysctl.d/disableipv6.conf && \
     echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf && \
@@ -65,7 +50,6 @@ If this causes any issues, it can be readded by apt-get install gcc-4.8-base
     echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf && \
     echo "net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf && \
     echo "net.ipv6.conf.eth1.disable_ipv6 = 1" >> /etc/sysctl.conf
-
 
 ##Copy the included Terminal CLI Color Scheme file to /etc/profile.d so that the terminal color will be included in all child images##
 
@@ -152,6 +136,8 @@ Issuing a `docker images` should now show a newly saved appcontainers/debian ima
    `docker run -it -d appcontainers/debian`
 
 ># Dockerfile Changelog
+
+    12/14/2015 - Update to 8.2
 
     09/29/2015 - Add Line to .bashrc to prevent additions to the basrc to be run from SSH/SCP login
 
