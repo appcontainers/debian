@@ -1,4 +1,4 @@
-## Debian 8.2 Jessie Base Minimal Install - 82 MB - Updated 12/14/2015 tags(lastest, jessie)
+## Debian 8.3 Jessie Base Minimal Install - 82 MB - Updated 06/11/2016 tags(lastest, jessie)
 
 ***This container is built from debian:latest, (127 MB Before Flatification)***
 
@@ -10,7 +10,7 @@
 echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar
 ```
 
-### Install required packages 
+### Install required packages
 ```bash
 DEBIAN_FRONTEND=noninteractive apt-get -y install nano
 ```
@@ -86,7 +86,7 @@ if [ "$PS1" ]; then
     else
         PS1="$Red$FancyX "
     fi
-    
+
     # If root, just print the host in red. Otherwise, print the current user
     # and host in green.
     if [[ $EUID == 0 ]]; then
@@ -94,7 +94,7 @@ if [ "$PS1" ]; then
     else
         PS1+="$Black $YellowBack $TERMTAG $Reset $Green \\u@\\h"
     fi
-    
+
     # Print the working directory and prompt marker in blue, and reset
     # the text color to the default.
     PS1+="$Blue\\w \\\$$Reset "
@@ -113,7 +113,7 @@ echo -e "\nif [[ -n \"\$SSH_CLIENT\" || -n \"\$SSH_TTY\" ]]; then\n\treturn;\nfi
 
 ### Set Dockerfile Runtime command
 ***Default command to run when lauched via docker run***
-    
+
 ```bash
 CMD /bin/bash
 ```
@@ -142,7 +142,7 @@ docker run -it -d \
 build/debian \
 /bin/bash
 ```
- 
+
 ***The run statement should start a detached container, however if you are attached, detach from the container***  
 `CTL P` + `CTL Q`
 
@@ -159,7 +159,7 @@ docker export debian | docker import - appcontainers/debian:latest
 Issuing a `docker images` should now show a newly saved appcontainers/debian image, which can be pushed to the docker hub.
 
 ***Run the container***
-    
+
 ```bash
 docker run -it -d appcontainers/debian
 ```
@@ -168,6 +168,7 @@ docker run -it -d appcontainers/debian
 
 ># Dockerfile Change-log:
 
+    06/11/2016 - Update to 8.3
     12/14/2015 - Update to 8.2
     09/29/2015 - Add Line to .bashrc to prevent additions to the basrc to be run from SSH/SCP login
     08/07/2015 - Turn off IPV6
