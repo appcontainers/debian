@@ -1,9 +1,9 @@
-############################################################
+###########################################################
 # Dockerfile to build Debian 8 Jessie Base Container
 # Based on: debian:latest
 # DATE: 07/07/15
 # COPYRIGHT: Appcontainers.com
-############################################################
+###########################################################
 
 # Set the base image in namespace/repo format. 
 # To use repos that are not on the docker hub use the example.com/namespace/repo format.
@@ -12,31 +12,31 @@ FROM library/debian:latest
 # File Author / Maintainer
 MAINTAINER Rich Nason rnason@appcontainers.com
 
-###################################################################
-#*************************  APP VERSIONS  *************************
-###################################################################
+###########################################################
+#*********************  APP VERSIONS  *********************
+###########################################################
 
 
-###################################################################
-#***************  OVERRIDE ENABLED ENV VARIABLES  *****************
-###################################################################
+###########################################################
+#***********  OVERRIDE ENABLED ENV VARIABLES  *************
+###########################################################
 
-ENV TERMTAG DEBIAN8
+ENV TERMTAG Debian8Base
 
-###################################################################
-#******************  ADD REQUIRED APP FILES  **********************
-###################################################################
+###########################################################
+#**************  ADD REQUIRED APP FILES  ******************
+###########################################################
 
 # Enable Progress Bar
 RUN echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar
 
-###################################################################
-#*******************  UPDATES & PRE-REQS  *************************
-###################################################################
+###########################################################
+#***************  UPDATES & PRE-REQS  *********************
+###########################################################
 
 # Update Base
 RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get -y install nano && \
+DEBIAN_FRONTEND=noninteractive apt-get -y install apt-utils curl vim python python-dev python-openssl libffi-dev libssl-dev gcc && \
 apt-get -y upgrade && \
 apt-get clean all && \
 rm -fr /var/lib/apt/lists/*
@@ -45,10 +45,21 @@ rm -fr /var/lib/apt/lists/*
 #*******************  APPLICATION INSTALL  ************************
 ###################################################################
 
+# Install pip and configure ansible
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py" && \
+python /tmp/get-pip.py && \
+pip install pip ansible --upgrade && \
+rm -fr /tmp/get-pip.py && \
+mkdir -p /etc/ansible/roles || exit 0 && \
+echo localhost ansible_connection=local > /etc/ansible/hosts
 
 ###################################################################
 #******************  POST DEPLOY CLEAN UP  ************************
 ###################################################################
+
+# Clean up packages we don't need now that ansible is installed
+RUN apt-get remove -y gcc python-dev libffi-dev libssl-dev && \
+apt-get autoremove -y 
 
 # Strip out Locale data
 RUN for x in `ls /usr/share/locale | grep -v en_GB`; do rm -fr /usr/share/locale/$x; done;
