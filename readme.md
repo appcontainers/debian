@@ -1,4 +1,4 @@
-## Debian 8.6 Jessie Base Minimal Install - 203 MB - Updated 11/28/2016 tags(lastest, jessie)
+## Debian 8.7 Jessie Base Minimal Install - 205 MB - Updated 03/24/2017 tags(lastest, jessie)
 
 ***This container is built from debian:latest, (394 MB Before Flatification)***
 
@@ -187,6 +187,7 @@ docker run -it -d appcontainers/debian
 
 ># Dockerfile Change-log:
 
+    03/24/2017 - Update to 8.7
     11/28/2016 - Update to 8.6 include python, pip, vim, and ansible to replace custom runconfig
     06/11/2016 - Update to 8.3
     12/14/2015 - Update to 8.2
