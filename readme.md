@@ -1,7 +1,7 @@
-**Debian Base Minimal Install - Updated 03/25/2017**
+**Debian Base Minimal Install - Updated 05/23/2017**
 
 
-**Debian 8 (Jessie) Base Minimal Install - 80 MB - Updated 03/25/2017**
+**Debian 8 (Jessie) Base Minimal Install - 80 MB - Updated 05/23/2017**
 
 >**Built from debian:latest**
 
@@ -15,7 +15,7 @@ http://www.appcontainers.com/debianjessie
 
 &nbsp;
 
-**Debian 8 (Jessie) Base Minimal Install w/Ansible - 205 MB - Updated 03/25/2017**
+**Debian 8 (Jessie) Base Minimal Install w/Ansible - 186 MB - Updated 05/23/2017**
 
 >**Built from debian:latest**
 

@@ -36,7 +36,7 @@ RUN echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar
 
 # Update Base
 RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get -y install apt-utils curl vim python python-dev python-openssl libffi-dev libssl-dev gcc && \
+DEBIAN_FRONTEND=noninteractive apt-get -y install apt-utils curl python python-dev python-openssl libffi-dev libssl-dev gcc && \
 apt-get -y upgrade && \
 apt-get clean all && \
 rm -fr /var/lib/apt/lists/*
